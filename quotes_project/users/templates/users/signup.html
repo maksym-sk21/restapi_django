@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div>
+        <h2>Sign Up</h2>
+    </div>
+    <form method="post" action="{% url 'users:signup' %}">
+        {% csrf_token %}
+        <div>
+            <label>Username:</label>
+            {{ form.username }}
+            <span>{{ form.errors.username }}</span>
+        </div>
+        <div>
+            <label>Email:</label>
+            {{ form.email }}
+            <span>{{ form.errors.email }}</span>
+        </div>
+        <div>
+            <label>Password:</label>
+            {{ form.password1 }}
+            <span>{{ form.errors.password1 }}</span>
+        </div>
+        <div>
+            <label>Password confirmation:</label>
+            {{ form.password2 }}
+            <span>{{ form.errors.password2 }}</span>
+        </div>
+        <div class="grid">
+            <button type="submit">Submit</button>
+            <button type="reset" class="secondary">Reset</button>
+        </div>
+    </form>
+</body>
+</html>

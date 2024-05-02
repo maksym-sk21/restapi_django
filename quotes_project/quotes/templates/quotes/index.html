@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Quotes</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="left-buttons">
+            <div class="buttons">
+                <a href="{% url 'add_quote' %}">Add Quote</a>
+            </div>
+            <div class="buttons">
+                <a href="{% url 'add_author' %}">Add Author</a>
+            </div>
+    </div>
+    <h1>Quotes</h1>
+        <div class="right-buttons">
+            <div class="auth">
+                <a href="/users/signup/">Signup</a>
+        </div>
+            <div class="auth">
+                <a href="/users/login/">Login</a>
+            </div>
+            <div class="auth">
+                <a href="/users/logout/">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    {% for quote in page.object_list %}
+        <div class="quote">
+            <p>Author: <a href="{% url 'author_detail' quote.author_fullname %}">{{ quote.author_fullname }}</a></p>
+            <p>{{ quote.quote }}</p>
+            <p>Tags: {{ quote.tags }}</p>
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+        {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}">Preview</a>
+        {% endif %}
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
